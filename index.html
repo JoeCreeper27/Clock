@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="stage">
+    <!-- 數字鐘 -->
+    <section id="digital" class="face" aria-live="off">
+      <div id="digital-time" class="digital-time">00:00:00</div>
+      <div id="digital-date" class="digital-date"></div>
+    </section>
+
+    <!-- 指針鐘 -->
+    <section id="analog" class="face" hidden>
+      <svg id="analog-svg" viewBox="-100 -100 200 200" role="img" aria-label="指針時鐘">
+        <circle class="rim" r="96"></circle>
+        <g id="ticks"></g>
+        <g id="numbers"></g>
+        <line id="hand-hour" class="hand hour" x1="0" y1="10" x2="0" y2="-48"></line>
+        <line id="hand-minute" class="hand minute" x1="0" y1="14" x2="0" y2="-72"></line>
+        <line id="hand-second" class="hand second" x1="0" y1="18" x2="0" y2="-82"></line>
+        <circle class="pivot" r="3.5"></circle>
+      </svg>
+    </section>
+  </main>
+
+  <button id="toggle-panel" class="panel-toggle" aria-expanded="false" aria-controls="panel" title="設定">⚙</button>
+
+  <aside id="panel" class="panel" hidden>
+    <fieldset>
+      <legend>顯示型態</legend>
+      <label><input type="radio" name="mode" value="digital" checked> 數字鐘</label>
+      <label><input type="radio" name="mode" value="analog"> 指針式</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>背景色</legend>
+      <label><input type="radio" name="bg" value="dark" checked> 深灰</label>
+      <label><input type="radio" name="bg" value="light"> 淺灰</label>
+      <label><input type="radio" name="bg" value="custom"> 自選
+        <input type="color" id="custom-color" value="#3a6ea5" aria-label="自選底色">
+      </label>
+      <label><input type="radio" name="bg" value="dynamic"> 動態色彩</label>
+      <label class="speed" id="speed-row">變化速度
+        <input type="range" id="speed" min="1" max="60" value="10">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>選項</legend>
+      <label><input type="checkbox" id="show-seconds" checked> 顯示秒數</label>
+      <label><input type="checkbox" id="hour24" checked> 24 小時制</label>
+    </fieldset>
+
+    <p class="hint">指針／數字顏色會依背景亮度自動切換為深灰或淺灰，確保對比。</p>
+  </aside>
+
+  <script src="clock.js"></script>
+</body>
+</html>
